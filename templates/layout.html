@@ -6,6 +6,18 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        <nav class="nav">
+            <a class="home-icon" href="/"><span>Hot</span><span>pot</span></a>
+            {% if session.user_id %}
+                hi {{ session.username }}
+                <a href="/logout">Log out</a>
+
+            {% else %}
+                <a href="/login">Log in</a>
+                <a href="/register">Register</a>
+
+            {% endif %}
+        </nav>
         <main>{% block main %}{% endblock %}</main>
     </body>
 </html>
