@@ -5,11 +5,29 @@
 
 {% endblock %}
 {% block main %}
+    <div class="whole-page-form">
+        <form action="/login" method="post">
+            <div class="input-line-login">
+                <div class="input-left">
+                    <p>Username</p>
+                </div>
+                <div>
+                    <input class="input" name="username" type="text" autocomplete="off" autofocus>
+                </div>
+            </div>
+            <div class="input-line-login">
+                <div class="input-left">
+                    <p>Password</p>
+                </div>
+                <div>
+                    <input class="input" name="password" type="password" autocomplete="off">
+                </div>
+            </div>
+            <div id="login-btn">
+                <button class="corner-btn">Log in</button>
+            </div>
+        </form>
+    </div>
 
-    <form action="/login" method="post">
-        <input name="username" type="text" autocomplete="off" autofocus placeholder="Your username">
-        <input name="password" type="password" autocomplete="off" placeholder="Your password">
-        <button>Log in</button>
-    </form>
 
 {% endblock %}

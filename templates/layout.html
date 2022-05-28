@@ -3,21 +3,39 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link href="/static/hotpot.jpg" rel="icon">
+        <link href="/static/styles.css" rel="stylesheet">
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
         <nav class="nav">
-            <a class="home-icon" href="/"><span>Hot</span><span>pot</span></a>
+            <a class="home-icon" href="/"><span>HOT</span><span>POT</span></a>
             {% if session.user_id %}
-                hi {{ session.username }}
-                <a href="/logout">Log out</a>
+
+                <ul class="navbar-right">
+                    <li class="nav-li">hi <span style="color: blue; font-style: bold;">{{ session.username }}</span></li>
+                    <li class="nav-li"><a href="/logout">Log out</a></li>
+                </ul>
 
             {% else %}
-                <a href="/login">Log in</a>
-                <a href="/register">Register</a>
+
+                <ul class="navbar-right">
+                    <li class="nav-li">hi friend!</li>
+                    <li class="nav-li"><a href="/login">Log in</a></li>
+                    <li class="nav-li"><a href="/register">Register</a></li>
+                </ul>
 
             {% endif %}
         </nav>
+        {% if get_flashed_messages() %}
+
+            <header>
+                <div class="flash">
+                    {{ get_flashed_message() | join(" ") }}
+                </div>
+            </header>
+
+        {% endif %}
         <main>{% block main %}{% endblock %}</main>
     </body>
 </html>

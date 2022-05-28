@@ -1,1 +1,115 @@
-abc
+.nav {
+    display: flex;
+    flex-direction: row;
+    background-image: url("background.jpg");
+    height: 100px;
+    font-size: 20px;
+    /*border: 1px solid brown;*/
+}
+.navbar-right {
+    margin: 40px 0 0 1000px;
+}
+.nav-li {
+    display: inline;
+    margin: 0 30px 0 30px;
+}
+.home-icon {
+    font-family: arial black, arial, sans-serif;
+    font-size: 36px;
+    font-style: bold;
+    margin: 25px 0 0 30px;
+    color: #823819;
+}
+.home-icon:hover {
+    color: #662000;
+}
+body {
+    background-color: #CDCDCD;
+}
+a {
+    text-decoration: none;
+    color: black;
+    font-style: bold;
+}
+a:hover {
+    color: white;
+}
+a:visited {
+    /*color: red;*/
+}
+.whole-page-form {
+    margin: 200px 0 0 600px;
+}
+.input-line-login {
+    clear: both;
+    vertical-align: baseline;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+.input-left {
+    float: left;
+    display: inline-block;
+    min-width: 0;
+
+    /* enable vertical stack for all 2 input bars */
+    width: 16%;
+
+    height: 42px;
+    line-height: 15px;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: bold;
+}
+.input {
+    float: left;
+    display: block;
+    min-width: 167px;
+    min-height: 41px;
+    vertical-align: middle;
+    height: 5px;
+    width: 300px;
+
+    /* to push right content to the right of the input bar */
+    margin-right: 100px;
+
+    border: 1px solid grey;
+    border-radius: 20px;
+    font-size: 16px;
+
+    /* to let the text inside the input bar away from the border a little bit */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.corner-btn {
+    background-color: #42a5f5;
+    color: white;
+    font-weight: bold;
+    font-family: arial, sans-serif;
+    position: center;
+    width: 120px;
+    height: 40px;
+    border-color: transparent;
+    overflow: hidden;
+    font-size: 18px;
+
+    /* create corners */
+    clip-path: polygon(
+    0 30%,
+    15% 0,
+    85% 0,
+    100% 30%,
+    100% 70%,
+    85% 100%,
+    15% 100%,
+    0% 70%,
+    0% 10%
+    )
+}
+.corner-btn:hover {
+    background-color: #1e88e5;
+}
+#login-btn {
+    width: 400px;
+    height: 100px;
+    margin: 50px 0 0 320px;
+}
