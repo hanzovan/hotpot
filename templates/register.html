@@ -1,16 +1,51 @@
 {% extends "layout.html" %}
 {% block title %}
 
-    login
+    register
 
 {% endblock %}
 {% block main %}
+    <div class="whole-page-form">
+        <form action="/register" method="post">
+            <div class="input-line-register">
+                <div class="input-left">
+                    <p>Username</p>
+                </div>
+                <div>
+                    <input class="input" name="username" type="text" autocomplete="off" autofocus placeholder="Your username">
+                </div>
+                <div class="input-right">
+                    <p>should be easy to remember such as your nickname</p>
+                </div>
+            </div>
+            <div class="input-line-register">
+                <div class="input-left">
+                    <p>Password</p>
+                </div>
+                <div>
+                    <input class="input" name="password" type="password" autocomplete="off" placeholder="Your password">
+                </div>
+                <div class="input-right">
+                    <p>Should be at least 6 characters, with alphabet, integer, and special character</p>
+                </div>
+            </div>
+            <div class="input-line-register">
+                <div class="input-left">
+                    <p>Confirm password</p>
+                </div>
+                <div>
+                    <input class="input" name="password_confirm" type="password" autocomplete="off" placeholder="Confirm password">
+                </div>
+                <div class="input-right">
+                    <p>Enter your password again, remember to check CAPsLOCK button</p>
+                </div>
+            </div>
+            <div id="register-btn">
+                <button class="corner-btn">Register</button>
+            </div>
 
-    <form action="/register" method="post">
-        <input name="username" type="text" autocomplete="off" autofocus placeholder="Your username">
-        <input name="password" type="password" autocomplete="off" placeholder="Your password">
-        <input name="password_confirm" type="password" autocomplete="off" placeholder="Confirm password">
-        <button>Log in</button>
-    </form>
+        </form>
+    </div>
+
 
 {% endblock %}

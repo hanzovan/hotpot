@@ -6,9 +6,8 @@
 {% endblock %}
 {% block main %}
 
-    Hello, my name is Archer!
-    <h1>This is new heading</h1>
-    <h2>This is h2 heading</h2>
-    <h3>This is a h3 heading</h3>
+    {% for article in articles %}
+        <p>{{ articles.index(article) + 1 }}{{". " + article }}</p>
+    {% endfor %}
 
 {% endblock %}

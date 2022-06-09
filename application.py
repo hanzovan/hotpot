@@ -2,7 +2,7 @@ from cs50 import SQL
 from flask import Flask, flash, request, redirect, render_template, jsonify, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import strong_password
+from helpers import strong_password, login_required, news
 from datetime import datetime, timedelta, date
 
 
@@ -19,8 +19,10 @@ db = SQL("sqlite:///hotpot.db")
 
 # index page
 @app.route("/")
+@login_required
 def index():
-    return render_template("index.html")
+    articles = news(10)
+    return render_template("index.html", articles=articles)
 
 
 # Register route
@@ -59,6 +61,9 @@ def register():
 
         session['user_id'] = user[0]['id']
         session['username'] = user[0]['username']
+
+        # Inform user that they register successfully and redirect them to homepage
+        flash("Congratulations! You are registered!")
         return redirect("/")
 
     # If user reached route via clicking link or being redirect
@@ -89,6 +94,9 @@ def login():
         else:
             session['user_id'] = user[0]['id']
             session['username'] = username
+
+            # Inform user that they successfully logged in
+            flash("You are now logged in!")
             return redirect("/")
 
     # If user reached route via clicking link or being redirect
@@ -100,4 +108,41 @@ def login():
 def logout():
     """ Allow user to log out """
     session.clear()
+    flash("Logged out!")
     return redirect("/")
+
+
+@app.route("/change_password", methods=["GET", "POST"])
+@login_required
+def change_password():
+
+    # If user reached route via submitting form
+    if request.method == "POST":
+
+        # Define variables
+        username = session['username']
+        password = request.form.get("password")
+        new_password = request.form.get("new_password")
+        new_password_confirm = request.form.get("new_password_confirm")
+        user = db.execute("SELECT * FROM users WHERE username = ?", username)
+
+        # Check input validity:
+        if not password:
+            return render_template("error.html", message="Missing password")
+        if not new_password:
+            return render_template("error.html", message="Missing new password")
+        if not new_password_confirm:
+            return render_template("error.html", message="You need to confirm new password")
+        if new_password != new_password_confirm:
+            return render_template("error.html", message="New password doesn't match with the confirm")
+        if not check_password_hash(user['hash'], password):
+            return render_template("error.html", message="Incorrect password")
+
+        # If everything is correct, change the password:
+        db.execute("UPDATE users SET hash = ? WHERE username = ?", generate_password_hash(new_password), username)
+        flash("Password changed! Congratulations!")
+        return redirect("/")
+
+    # If user reached route via clicking link
+    else:
+        return render_template("change_password.html")
