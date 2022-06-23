@@ -5,9 +5,32 @@
 
 {% endblock %}
 {% block main %}
+    <div class="header">
+        <h1>News from vnexpress, zingnews, aljajeera, reuster</h1>
+    </div>
+    <ol>
+        {% for article in articles %}
+            <li><p>{{ article }}</p></li>
+        {% endfor %}
+    </ol>
 
-    {% for article in articles %}
-        <p>{{ articles.index(article) + 1 }}{{". " + article }}</p>
-    {% endfor %}
+    <div class="footer">
+        <p>Choose quantity for each news yourself</p>
+    </div>
+    <div class="normal-form">
+        <form action="/" method="post">
+            <select name="quantity">
+                <option disabled selected>choose</option>
+                {% for i in range(1, 30) %}
+
+                    <option>{{ i }}</option>
+
+                {% endfor %}
+            </select>
+            <button>Check news</button>
+        </form>
+    </div>
+
+
 
 {% endblock %}

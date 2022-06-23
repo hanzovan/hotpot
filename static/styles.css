@@ -129,3 +129,20 @@ p {
     font-size: 20px;
     font-style: bold;
 }
+.header {
+    font-family: arial, sans-serif;
+    font-style: bold;
+    font-size: 28px;
+    margin-left: 200px;
+    color: brown;
+}
+.footer {
+    font-family: arial, sans-serif;
+    font-style: italic;
+    font-size: 18px;
+    color: brown;
+    margin-left: 200px;
+}
+.normal-form {
+    margin-left: 250px;
+}

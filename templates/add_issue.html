@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    add issue
+
+{% endblock %}
+{% block main %}
+
+    <form action="/add_issue" method="post">
+        <input name="issue" type="text" autocomplete="off" autofocus placeholder="issue name">
+        <input name="description" type="text" autocomplete="off" placeholder="issue's description">
+        <input name="solution" type="text" autocomplete="off" placeholder="your solution">
+        <button class="btn btn-link">Submit</button>
+    </form>
+
+{% endblock %}

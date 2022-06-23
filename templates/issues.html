@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    issues
+
+{% endblock %}
+{% block main %}
+    <ul>
+        {% for issue in issues %}
+
+            <li>{{ issue.issue }}</li>
+
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

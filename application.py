@@ -18,11 +18,18 @@ db = SQL("sqlite:///hotpot.db")
 
 
 # index page
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
-    articles = news(10)
-    return render_template("index.html", articles=articles)
+    # If user reached route by submitting form
+    if request.method == "POST":
+        quantity = int(request.form.get("quantity"))
+        articles = news(quantity)
+        return render_template("index.html", articles=articles)
+
+    else:
+        articles = news(10)
+        return render_template("index.html", articles=articles)
 
 
 # Register route
@@ -146,3 +153,49 @@ def change_password():
     # If user reached route via clicking link
     else:
         return render_template("change_password.html")
+
+
+@app.route("/add_issue", methods=["GET", "POST"])
+def add_issue():
+
+    # Check method
+    if request.method == "POST":
+
+        # Define variables:
+        issue = request.form.get("issue")
+        description = request.form.get("description")
+        solution = request.form.get("solution")
+        user = session["user_id"]
+
+        # Check input
+        if not issue:
+            return render_template("error.html", message="Missing issue name")
+
+        if not description:
+            return render_template("error.html", message="Missing description")
+
+        if not solution:
+            solution = ""
+
+        # If inputs are valid
+        db.execute("INSERT INTO helpers(user_id, issue, description, solution) VALUES (?, ?, ?, ?)", user, issue, description, solution)
+
+        return redirect("/")
+
+    # If user reached route via clicking link or being redirect
+    else:
+        return render_template("add_issue.html")
+
+
+@app.route("/issues", methods=["GET", "POST"])
+def issues():
+
+    # Check method
+    if request.method == "POST":
+        return TODO
+
+    # If user reached route via clicking link
+    else:
+        issues = db.execute("SELECT * FROM helpers")
+
+        return render_template("issues.html", issues=issues)
